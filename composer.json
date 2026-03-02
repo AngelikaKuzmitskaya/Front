@@ -1,0 +1,14 @@
+{
+  "name": "vendor_name/Online-university-master",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "user",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="065b47ae-1f70-4d0e-8246-dbceecaec5fe" name="LocalServerForPSIIP" url="http://localhost">
+        <fileTransfer mountedRoot="E:\Online-university-master" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

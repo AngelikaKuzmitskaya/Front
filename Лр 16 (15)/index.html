@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Объекты в JavaScript - Лабораторная работа</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        pre { background: #f4f4f4; padding: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+<h1>Лабораторная работа: Объекты в JavaScript</h1>
+<p>Откройте консоль браузера (F12 > Console) для просмотра вывода скриптов. Ниже — результаты на странице.</p>
+
+<h2>Пример 1: Создание объекта</h2>
+<pre id="output1"></pre>
+
+<h2>Пример 2: Описание объекта</h2>
+<pre id="output2"></pre>
+
+<h2>Пример 3: Доступ к свойствам</h2>
+<pre id="output3"></pre>
+
+<h2>Пример 4: Удаление свойства</h2>
+<pre id="output4"></pre>
+
+<h2>Пример 5: Проверка свойства</h2>
+<pre id="output5"></pre>
+
+<h2>Пример 6: Перебор свойств</h2>
+<pre id="output6"></pre>
+
+<script>
+    // Пример 1
+    let car = {
+        brand: "Toyota",
+        model: "Corolla",
+        year: 2020,
+        start: function() {
+            return "Engine started for " + this.brand + " " + this.model;
+        }
+    };
+    console.log(car.start());
+    document.getElementById("output1").textContent = "Консоль: " + car.start() + "\nБренд: " + car.brand;
+
+    // Пример 2
+    let person = {
+        firstName: "John",
+        lastName: "Doe",
+        address: { city: "New York", zip: 10001 },
+        fullName: function() { return this.firstName + " " + this.lastName; }
+    };
+    console.log(person.fullName());
+    document.getElementById("output2").textContent = "Полное имя: " + person.fullName() + "\nГород: " + person.address.city;
+
+    // Пример 3
+    let book = { title: "1984", author: "Orwell", pages: 328 };
+    console.log(book.title, book["author"]);
+    document.getElementById("output3").textContent = "Заголовок: " + book.title + "\nАвтор: " + book["author"];
+
+    // Пример 4
+    let student = { name: "Anna", grade: "A", age: 20 };
+    console.log("До удаления:", student);
+    delete student.age;
+    console.log("После удаления:", student);
+    document.getElementById("output4").textContent = "Объект после удаления: " + JSON.stringify(student, null, 2);
+
+    // Пример 5
+    let product = { name: "Laptop", price: 1000 };
+    console.log("price" in product, product.hasOwnProperty("brand"));
+    document.getElementById("output5").textContent = "Свойство 'price' существует: " + ("price" in product) + "\nСвойство 'brand' существует: " + product.hasOwnProperty("brand");
+
+    // Пример 6
+    let settings = { theme: "dark", language: "en", notifications: true };
+    let output = "";
+    for (let prop in settings) {
+        console.log(prop + ": " + settings[prop]);
+        output += prop + ": " + settings[prop] + "\n";
+    }
+    document.getElementById("output6").textContent = output;
+</script>
+</body>
+</html>

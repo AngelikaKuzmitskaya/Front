@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <title>Онлайн-университет</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="logo-section">
+        <img src="Image/logo-box.png" class="logo" alt="Логотип" id="logo">
+    </div>
+
+    <!-- Бургер кнопка для мобильных -->
+    <button class="burger-button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+    </button>
+
+    <div class="search-catalog-container">
+        <button class="catalog-button">☰ Каталог курсов</button>
+        <form class="search-form" role="search" aria-label="Поиск по сайту">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="search" placeholder="Чему хотите научиться?" aria-label="Поиск" />
+        </form>
+    </div>
+
+    <div class="favorites-link">
+        <a href="favorites.html">⭐ Избранное</a>
+    </div>
+
+    <div class="social-icons">
+        <img src="Image/Frame%201919.png" alt="Telegram">
+        <img src="Image/Frame%201920.png" alt="Info">
+        <img src="Image/Frame%201921.png" alt="VK">
+    </div>
+
+    <div class="nav-section">
+        <a class="nav-link" href="#">О нас</a>
+        <a class="nav-link" href="#">Частые вопросы</a>
+
+        <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true): ?>
+            <!-- Ссылка видна только администратору -->
+            <a href="admin.php" class="login-button" style="border-color: #007bff; color: #007bff;">⚙️ Админ-блок</a>
+            <a href="logout.php" class="login-button" style="border-color: #ff4d4d; color: #ff4d4d;">Выход</a>
+        <?php else: ?>
+            <!-- Обычный вход для пользователей -->
+            <a href="login.php" class="login-button">Вход</a>
+        <?php endif; ?>
+
+        <button class="contact-button">Контакты</button>
+    </div>
+
+    <!-- Мобильное меню -->
+    <nav id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <a class="nav-link" href="#">О нас</a>
+        <a class="nav-link" href="#">Частые вопросы</a>
+        <button class="contact-button">Контакты</button>
+    </nav>
+</header>
+
+
+<main>
+
+    <section class="cs-section">
+        <div class="cs-notification-bar">
+            <div class="cs-notification-left">
+                <span class="cs-notification-title">Инженерно-проектировочная деятельность</span>
+            </div>
+
+            <div class="cs-notification-center">
+                <span class="cs-countdown-label">До конца набора заявок</span>
+                <div class="cs-timer-container">
+                    <div class="cs-countdown" id="days"></div>
+                    <div class="cs-timer-label">Дней</div>
+                </div>
+
+                <div class="cs-timer-container">
+                    <div class="cs-countdown" id="hours"></div>
+                    <div class="cs-timer-label">Часов</div>
+                </div>
+
+                <div class="cs-timer-container">
+                    <div class="cs-countdown" id="minutes"></div>
+                    <div class="cs-timer-label">Минут</div>
+                </div>
+
+                <div class="cs-timer-container">
+                    <div class="cs-countdown" id="seconds"></div>
+                    <div class="cs-timer-label">Секунд</div>
+                </div>
+            </div>
+            <div class="cs-notification-right">
+                <button class="cs-btn-enroll">Записаться на курс</button>
+                <button class="cs-btn-close" aria-label="Закрыть уведомление">&times;</button>
+            </div>
+        </div>
+
+        <div class="cs-content-grid">
+            <div class="cs-content-left">
+                <div class="cs-tabs">
+                    <button class="cs-tab cs-tab--active">Высшее</button>
+                    <button class="cs-tab">Дополнительное</button>
+                    <button class="cs-tab">Корпоративное</button>
+                </div>
+
+                <p class="cs-small-label">Получи</p>
+                <h2 id="content-header">Высшее профессиональное образование</h2>
+                <button class="cs-btn-primary">подобрать программу</button>
+
+                <div class="cs-tags">
+                    <span class="cs-tag">Бизнес</span>
+                    <span class="cs-tag">Психология</span>
+                    <span class="cs-tag">Творчество и креатив</span>
+                    <span class="cs-tag">Здоровье и красота</span>
+                    <span class="cs-tag">Подготовка к ЕГЭ</span>
+                    <span class="cs-tag">Управление</span>
+                    <span class="cs-tag">История</span>
+                    <span class="cs-tag">Китай</span>
+                    <span class="cs-tag">Политика</span>
+                    <span class="cs-tag">Информационная безопасность</span>
+                    <span class="cs-tag">Языки и перевод</span>
+                    <span class="cs-tag">Soft Skills</span>
+                    <span class="cs-tag">Социальная работа</span>
+                </div>
+            </div>
+
+            <div class="cs-content-right">
+                <img src="Image/guy.png" alt="Guy"/>
+            </div>
+        </div>
+    </section>
+
+    <div class="header">
+        <h1>Курсы</h1>
+        <p class="subtitle">Найдено: 3 программ обучения</p>
+        <div class="summary-container">
+            <details class="summary">
+                <summary>Сначала дешевые<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                <label class="option" for="sortByName">
+                    <input type="radio" id="sortByName" name="sort" value="name" checked /> Сначала дешевые
+                </label>
+                <label class="option" for="sortByDate">
+                    <input type="radio" id="sortByDate" name="sort" value="date" /> Сначала дорогие
+                </label>
+            </details>
+            <details class="summary">
+                <summary>По длительности<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                <label class="option" for="filterActive">
+                    <input type="radio" id="filterActive" name="filter" value="active" checked /> Сначала короткие </label>
+                <label class="option" for="filterCompleted">
+                    <input type="radio" id="filterCompleted" name="filter" value="completed" /> Сначала долгие </label>
+            </details>
+        </div>
+    </div>
+
+    <section class="main-container">
+        <div class="filter-panel">
+            <details open class="filter-group">
+                <summary>Форма обучения<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                <label class="option" for="formDistant">
+                    <input type="checkbox" id="formDistant" name="form" value="distant" />
+                    Дистанционная
+                </label>
+                <label class="option" for="formOnsite">
+                    <input type="checkbox" id="formOnsite" name="form" value="onsite" checked />
+                    Очная
+                </label>
+                <label class="option" for="formMixed">
+                    <input type="checkbox" id="formMixed" name="form" value="mixed" />
+                    Смешанная
+                </label>
+            </details>
+
+            <details open class="filter-group">
+                <summary>Длительность<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                <div id="duration-slider" style="margin: 20px 0;"></div>
+                <div class="range-values" style="display: flex; gap: 8px; align-items: center;">
+                    <input type="number" id="durationFrom" min="0" max="120" value="34" style="width: 60px;" /> <span>ч</span>
+                    <input type="number" id="durationTo" min="0" max="120" value="56" style="width: 60px;" /> <span>ч</span>
+                </div>
+            </details>
+
+            <details open class="filter-group">
+                <summary>Список выдаваемых документов<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                <label class="option" for="docCertificate">
+                    <input type="checkbox" id="docCertificate" name="docs" value="certificate" />
+                    Удостоверение о повышении квалификации
+                </label>
+                <label class="option" for="docDiploma">
+                    <input type="checkbox" id="docDiploma" name="docs" value="diploma" checked />
+                    Диплом о профессиональной переподготовке
+                </label>
+                <label class="option" for="docWorkCertificate">
+                    <input type="checkbox" id="docWorkCertificate" name="docs" value="work_certificate" />
+                    Свидетельство о профессии рабочего, должности служащего
+                </label>
+            </details>
+
+            <details open class="filter-group">
+                <summary>Требование к образованию<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                <label class="option" for="educationHigher">
+                    <input type="radio" id="educationHigher" name="education" value="higher" />
+                    Высшее
+                </label>
+                <label class="option" for="educationSecondary">
+                    <input type="radio" id="educationSecondary" name="education" value="secondary" />
+                    Среднее специальное
+                </label>
+                <label class="option" for="educationAny">
+                    <input type="radio" id="educationAny" name="education" value="any" checked />
+                    Не важно
+                </label>
+            </details>
+
+            <details open class="filter-group">
+                <summary>Тип программы<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                <label class="option" for="programQualification">
+                    <input type="checkbox" id="programQualification" name="program_type" value="qualification" />
+                    Программа повышение квалификации
+                </label>
+                <label class="option" for="programProfessional">
+                    <input type="checkbox" id="programProfessional" name="program_type" value="professional" checked />
+                    Профессиональная переподготовка
+                </label>
+            </details>
+
+            <details open class="filter-group">
+                <summary>Стоимость<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                <div id="duration-sliders" style="margin: 20px 0;"></div>
+                <div class="range-values" style="display: flex; gap: 8px; align-items: center;">
+                    <input type="number" id="durationFroms" min="0" max="150000" value="126334" style="width: 60px;" /> <span>ч</span>
+                    <input type="number" id="durationTos" min="0" max="150000" value="122334" style="width: 60px;" /> <span>ч</span>
+                </div>
+            </details>
+
+            <details open class="filter-group">
+                <summary>Дата проведения<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                <div class="date-range">
+                    <label for="dateFrom">От</label>
+                    <input type="date" id="dateFrom" value="2024-09-01" />
+                    <label for="dateTo">До</label>
+                    <input type="date" id="dateTo" value="2025-02-09" />
+                </div>
+            </details>
+
+            <label class="citizenship" for="foreignCitizen">
+                <input type="checkbox" id="foreignCitizen" />
+                У меня иностранное гражданство
+            </label>
+
+            <div class="buttons">
+                <button type="button" class="reset" onclick="resetFilters()">Сбросить</button>
+                <button type="button" class="apply" onclick="applyFilters()">Применить</button>
+            </div>
+        </div>
+
+        <div class="card-panel" style="margin-top: 20px;">
+            <div class="card">
+                <div class="card-image-container">
+                    <img src="Image/Img-box.png" alt="Practitioner of Political Administration" />
+                    <button class="favorite-btn" data-id="1" aria-label="Добавить в избранное">
+                        <i class="far fa-star"></i>
+                    </button>
+                </div>
+                <div class="card-content" id="1">
+                    <h3 class="title">Practitioner of Political Administration (PPA)</h3>
+                    <p class="label">Категория:</p>
+                    <p class="category">Информационная безопасность</p>
+                    <p class="label">Период проведения:</p>
+                    <p class="period">21 ноября-15 декабря</p>
+                    <div class="tags">
+                        <span class="tag">36 ак.ч</span>
+                        <span class="tag">Очно/Дистанционно</span>
+                        <span class="tag">Профессиональная переподготовка</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image-container">
+                    <img src="Image/Img-box(1).png" alt="Practitioner of Business Administration" />
+                    <button class="favorite-btn" data-id="2" aria-label="Добавить в избранное">
+                        <i class="far fa-star"></i>
+                    </button>
+                </div>
+                <div class="card-content" id="2">
+                    <h3 class="title">Practitioner of Business Administration (PBA)</h3>
+                    <p class="label">Категория:</p>
+                    <p class="category">Информационная безопасность</p>
+                    <p class="label">Период проведения:</p>
+                    <p class="period">21 ноября-15 декабря</p>
+                    <div class="tags">
+                        <span class="tag">36 ак.ч</span>
+                        <span class="tag">Очно/Дистанционно</span>
+                        <span class="tag">Профессиональная переподготовка</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image-container">
+                    <img src="Image/Img-box(1).png" alt="Practitioner of Business Administration" />
+                    <button class="favorite-btn" data-id="3" aria-label="Добавить в избранное">
+                        <i class="far fa-star"></i>
+                    </button>
+                </div>
+                <div class="card-content" id="3">
+                    <h3 class="title">Practitioner of Business Administration (PBA)</h3>
+                    <p class="label">Категория:</p>
+                    <p class="category">Информационная безопасность</p>
+                    <p class="label">Период проведения:</p>
+                    <p class="period">21 ноября-15 декабря</p>
+                    <div class="tags">
+                        <span class="tag">36 ак.ч</span>
+                        <span class="tag">Очно/Дистанционно</span>
+                        <span class="tag">Профессиональная переподготовка</span>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="more">Показать еще</button>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <h1>О нас</h1>
+        <div class="about-content">
+            <div class="instructor-card">
+                <div class="instructor-title">Преподаватели<br>эксперты</div>
+                <img src="Image/73d5450ff9372911c0a175b6546a1bd558515fe6.png" alt="Преподаватель" />
+            </div>
+            <div class="statistics-cards">
+                <div class="statistic-card">
+                    <div class="statistic-header">
+                        <img src="Image/Vector (Stroke).png" alt="Stroke">
+                        №1
+                    </div>
+                    <div class="statistic-footer">Из социальных ВУЗов</div>
+                </div>
+
+                <div class="statistic-card">
+                    <div class="statistic-header">
+                        <img src="Image/Vector icon 2.png" alt="Document">
+                        35+
+                    </div>
+                    <div class="statistic-footer">Образовательных программ</div>
+                </div>
+
+                <div class="statistic-card">
+                    <div class="statistic-header">
+                        <img src="Image/Union.png" alt="Person">
+                        1 000+
+                    </div>
+                    <div class="statistic-footer">Слушателей закончили обучение</div>
+                </div>
+
+                <div class="statistic-card">
+                    <div class="statistic-header">
+                        <img src="Image/Vector(1).png" alt="Internet">
+                        Online
+                    </div>
+                    <div class="statistic-footer">Обучение онлайн</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="certificate-section">
+        <h1>Выдаваемые документы</h1>
+        <div class="certificate-wrapper">
+            <div class="certificate-image">
+                <img src="Image/8026dd2e88e56d9342673911a1f94531896b13fc.png" alt="Документ" />
+            </div>
+            <div class="certificate-info">
+                <h2>Повышение квалификации</h2>
+                <p>
+                    Повышение квалификации — это обновление и актуализация знаний,
+                    получение ранее теоретических и практических знаний. Сотрудники
+                    становятся экспертами в разных профессиях и своих квалификациях,
+                    но проходят обучение, необходимое для соответствия требованиям
+                    работодателей или профстандартов.
+                </p>
+                <p>
+                    После курсов, которые длятся не менее 16 часов, слушатель
+                    получает удостоверение о повышении квалификации, то есть он
+                    получает новые профессиональные компетенции и свидетельствующие об этом.
+                </p>
+                <button class="btn-certificate-primary">Хочу такой же</button>
+                <button class="btn-certificate-secondary">Открыть образец</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="courses-section">
+        <div class="courses-container">
+            <div class="courses-content-left">
+                <h1 class="courses-title">Станьте руководителем <span class="highlight">№1</span></h1>
+                <p class="courses-subtitle">Ведется набор на программы бизнес и политического администрирования</p>
+                <p class="courses-start-date">Старт - ноябрь 2023</p>
+                <div class="courses-cards-row">
+                    <div class="course-card">
+                        <p class="course-card-title">PPA Практик политического администрирования</p>
+                        <button class="course-btn">Подробнее <ion-icon name="chevron-forward-outline"></ion-icon></button>
+                    </div>
+                    <div class="course-card">
+                        <p class="course-card-title">PBA Практик бизнес-администрирования</p>
+                        <button class="course-btn">Подробнее <ion-icon name="chevron-forward-outline"></ion-icon></button>
+                    </div>
+                </div>
+            </div>
+            <div class="courses-content-right">
+                <h2 class="request-form-title">Оставьте заявку на курс и мы вам перезвоним</h2>
+                <form class="request-form" id="requestForm">
+                    <input type="hidden" name="form_type" value="Заявка на курс">
+                    <label>
+                        <input type="text" id="UserName" name="name" placeholder="Ваше Имя" />
+                        <div class="error-message" id="nameError">Поле "Имя" обязательно для заполнения.</div>
+                    </label>
+                    <label>
+                        <input type="tel" id="PhoneNum" name="phone" placeholder="Ваш номер" />
+                        <div class="error-message" id="phoneError">Введите корректный номер телефона.</div>
+                    </label>
+                    <label>
+                        <input type="email" id="email" name="email" placeholder="Ваш e-mail" />
+                        <div class="error-message" id="emailError">Введите корректный email.</div>
+                    </label>
+                    <button type="submit" class="submit-request-btn">Оставить заявку</button>
+                    <p class="privacy-policy-note">Нажимая на кнопку, вы соглашаетесь с политикой конфиденциальности</p>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section-why-rgsu">
+        <div class="section-why-rgsu__left">
+            <h1 class="section-why-rgsu__title">Почему РГСУ?</h1>
+            <img src="Image/Logo.png" alt="РГСУ Логотип" class="section-why-rgsu__image" />
+        </div>
+
+        <div class="section-why-rgsu__right">
+            <div class="feature-card">
+                <h2 class="feature-card__title">Дипломы и удостоверения установленного образца</h2>
+                <p class="feature-card__description">Дают право на ведение профессиональной деятельности</p>
+            </div>
+            <div class="feature-card">
+                <h2 class="feature-card__title">Поддержка во время обучения</h2>
+                <p class="feature-card__description">Преподаватели всегда ответят на вопросы и помогут с решением сложных задач</p>
+            </div>
+            <div class="feature-card">
+                <h2 class="feature-card__title">3 звезды в рейтинге QS Stars University Ratings</h2>
+                <p class="feature-card__description">Оценились Symonds на основе своих методов высокой оценки РГСУ</p>
+            </div>
+            <div class="feature-card">
+                <h2 class="feature-card__title">Вековая история университета</h2>
+                <p class="feature-card__description">Мы постоянно развиваемся, передаем наш опыт и знания своим студентам</p>
+            </div>
+            <div class="feature-card">
+                <h2 class="feature-card__title">80% преподавателей имеют ученую степень</h2>
+                <p class="feature-card__description">Это эксперты в своих направлениях и нишах</p>
+            </div>
+            <div class="feature-card">
+                <h2 class="feature-card__title">Обучаем востребованным профессиям</h2>
+                <p class="feature-card__description">IT и психологии, бизнес-администрированию и нутрициологии, а также еще 30+ курсов для карьерного роста</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-corporate-training">
+        <div class="container-corporate-training">
+            <div class="content-corporate-training">
+                <div class="cards-corporate-training">
+                    <div class="card-corporate-training">
+                        <h1 class="card-corporate-training__title">Корпоративное обучение</h1>
+                        <a href="#" class="card-corporate-training__button">Подробнее</a>
+                    </div>
+                    <div class="card-corporate-training">
+                        <img src="Image/case.png" alt="Кейс" class="card-corporate-training__image">
+                        <label class="card-corporate-training__description">Повышение квалификации расширит компетенции как начинающих специалистов, так и настоящих профи.</label>
+                    </div>
+                    <div class="card-corporate-training">
+                        <img src="Image/Star 4.png" alt="Звезда" class="card-corporate-training__image">
+                        <label class="card-corporate-training__description">Профессиональная переподготовка даст возможность получить новые навыки амбициозным коллегам.</label>
+                    </div>
+                    <div class="card-corporate-training">
+                        <img src="Image/coins.png" alt="Монеты" class="card-corporate-training__image">
+                        <label class="card-corporate-training__description">Выгодные условия для вашей организации. Высокое качество образования. Онлайн-обучение без отрыва от работы.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="image-corporate-training">
+                <img src="Image/0feed779712e2059b82a6dea3a2fcaee6dd44ccd.png" alt="Обучение" class="image-corporate-training__img">
+            </div>
+        </div>
+    </section>
+
+    <section class="training-section">
+        <div class="form-container">
+            <div class="form-left">
+                <h1>Поможем подобрать программу обучения</h1>
+                <div class="image-wrapper">
+                    <img src="Image/c37f5c47ba997d75c6bfd0eafda20b07cb13da0c.png" alt="Подарок" />
+                    <div class="label-consultation">бесплатная консультация</div>
+                </div>
+            </div>
+            <div class="form-right">
+                <p>Отправьте заявку, и мы вам перезвоним в течение часа</p>
+                <form id="contactForm">
+                    <input type="hidden" name="form_type" value="Подбор программы">
+                    <label>
+                        <input type="text" id="name1" name="name" placeholder="Ваше Имя" required />
+                        <div id="nameError1" class="error-message">Имя обязательно и должно содержать минимум 2 символа.</div>
+                    </label>
+                    <label>
+                        <input type="tel" id="phone1" name="phone" placeholder="Ваш номер" required />
+                        <div id="phoneError1" class="error-message">Введите корректный номер телефона.</div>
+                    </label>
+                    <label>
+                        <input type="email" id="email1" name="email" placeholder="Ваш e-mail" required />
+                        <div id="emailError1" class="error-message">Введите корректный email.</div>
+                    </label>
+                    <button class="submit-btn" type="submit">Отправить заявку</button>
+                </form>
+                <p class="privacy-note">
+                    Нажимая на кнопку, вы соглашаетесь с
+                    <a href="#">политикой конфиденциальности</a>
+                </p>
+                <div id="errorMessages" style="color: red; margin-top: 10px;"></div>
+                <div id="successMessage" style="color: green; margin-top: 10px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <h2 class="reviews-title mb-4 fw-semibold text-dark" style="color: black;">Отзывы</h2>
+        <div class="reviews-scroll-container">
+            <div class="review-card">
+                <img src="Image/54996b69b4c76cefa393447d285b6028c04f862b.jpg" alt="Елизавета Агафонова" />
+                <div class="review-overlay">
+                    <div class="review-play-icon">&#9654;</div>
+                    <div class="review-play-icon" title="Play"></div>
+                    <div class="review-overlay-top">
+                        <div class="review-name">Елизавета<br /> Агафонова</div>
+                        <div class="review-rating">
+                            <span>4.5/5</span><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <img src="Image/c3a9277b6e9bd359b049d28a3a266d2e727c8d32.jpg" alt="Павел Морозов" />
+                <div class="review-overlay">
+                    <div class="review-play-icon">&#9654;</div>
+                    <div class="review-play-icon" title="Play"></div>
+                    <div class="review-overlay-top">
+                        <div class="review-name">Павел<br /> Морозов</div>
+                        <div class="review-rating">
+                            <span>4.5/5</span><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <img src="Image/b9723d584c6636b1efbb44be06e715313406010b.jpg" alt="Елизавета Агафонова" />
+                <div class="review-overlay">
+                    <div class="review-play-icon">&#9654;</div>
+                    <div class="review-play-icon" title="Play"></div>
+                    <div class="review-overlay-top">
+                        <div class="review-name">Наталья<br /> Сердинюк</div>
+                        <div class="review-rating">
+                            <span>4.5/5</span><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <img src="Image/142efbbeb23cff66e3d1471f003cc9215f7c74da.jpg" alt="Павел Морозов" />
+                <div class="review-overlay">
+                    <div class="review-play-icon">&#9654;</div>
+                    <div class="review-play-icon" title="Play"></div>
+                    <div class="review-overlay-top">
+                        <div class="review-name">Светлана<br /> Фетисова</div>
+                        <div class="review-rating">
+                            <span>4.5/5</span><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <img src="Image/12ee385caa2e0f8fb5a92881b5c90f81538b305c.jpg" alt="Елизавета Агафонова" />
+                <div class="review-overlay">
+                    <div class="review-play-icon">&#9654;</div>
+                    <div class="review-play-icon" title="Play"></div>
+                    <div class="review-overlay-top">
+                        <div class="review-name">Елизавета<br /> Агафонова</div>
+                        <div class="review-rating">
+                            <span>4.5/5</span><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <img src="Image/88fd9e31f2d1f50cdd6f1870a2bd336fa45d7c94.jpg" alt="Павел Морозов" />
+                <div class="review-overlay">
+                    <div class="review-play-icon">&#9654;</div>
+                    <div class="review-play-icon" title="Play"></div>
+                    <div class="review-overlay-top">
+                        <div class="review-name">Светлана<br /> Фетисова</div>
+                        <div class="review-rating">
+                            <span>4.5/5</span><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="questions-section">
+        <div class="wrapper">
+            <div class="questions">
+                <h2>Частые вопросы</h2>
+                <details>
+                    <summary>Какие документы нужны для поступления?<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                    <p>Паспорт, аттестат или диплом, заявление.</p>
+                </details>
+                <details>
+                    <summary>Варианты оплаты обучения<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                    <p>Единовременно или по частям — ежемесячно или по семестрам.</p>
+                </details>
+                <details open>
+                    <summary>Есть ли обратная связь и поддержка в течение обучения?<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                    <p>С учётом сложившейся международной обстановки, семантический разбор внешних противодействий однозначно определяет каждого участника как способного принимать собственные решения касаемо кластеризации усилий.</p>
+                </details>
+                <details>
+                    <summary>Как проходят занятия?<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                    <p>Занятия проходят онлайн в формате вебинаров.</p>
+                </details>
+                <details>
+                    <summary>Что будет выдано тем, кто еще получает первое высшее или среднее профессиональное образование?<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                    <p>Сертификат или диплом в зависимости от программы.</p>
+                </details>
+                <details>
+                    <summary>Как часто нужно платить за обучение?<ion-icon name="chevron-down-outline" class="icon-checkmark"></ion-icon></summary>
+                    <p>Обычно ежемесячно, но возможны другие варианты.</p>
+                </details>
+            </div>
+
+            <div class="contact-form">
+                <div class="blue-circle" aria-hidden="true"></div>
+                <h2>Задайте вопрос</h2>
+                <form id="contact-form" onsubmit="event.preventDefault(); handleSubmit();">
+                    <input type="hidden" name="form_type" value="Обратная связь">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" name="name" required placeholder="Ваше имя" autocomplete="name" />
+                    <div id="nameError2" class="error-message">Имя обязательно и должно содержать минимум 2 символа.</div>
+
+                    <label for="phone">Телефон</label>
+                    <div class="phone-combined" id="phone-combined">
+                        <div class="country-select" id="country-select" tabindex="0" aria-haspopup="listbox" aria-expanded="false" role="combobox" aria-label="Выберите код страны">
+                            <span class="flag" id="selected-flag">🇷🇺</span>
+                            <span id="selected-code">+7</span>
+                            <span class="arrow"></span>
+                        </div>
+                        <input type="tel" id="phone" name="phone" class="phone-input" placeholder="999 999 99 99" aria-label="Номер телефона" required autocomplete="tel" />
+                    </div>
+                    <input type="hidden" name="country-code" id="country-code-hidden" value="+7" />
+                    <div id="phoneError2" class="error-message">Введите корректный номер телефона.</div>
+
+                    <label for="message">Сообщение</label>
+                    <textarea id="message" name="message" placeholder="Ваше сообщение" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; margin-top: 4px;" rows="4"></textarea>
+
+                    <button type="submit">Отправить</button>
+                </form>
+                <div id="successMessage1" style="color: green; margin-top: 10px;"></div>
+                <p class="privacy-note">
+                    Нажимая на кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a>.
+                </p>
+            </div>
+        </div>
+
+        <div class="country-list" id="country-list" role="listbox" tabindex="-1" aria-label="Список кодов стран"></div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-column">
+                <h4>Время работы:</h4>
+                <p><strong>Пн-Чт 9:00-18:00</strong></p>
+                <p><strong>Пт 9:00-16:45</strong></p>
+            </div>
+            <div class="footer-column">
+                <h4>Телефон</h4>
+                <p><strong>7 (495) 255-67-67</strong></p>
+                <p><strong>доб. 1282, 1851</strong></p>
+            </div>
+            <div class="footer-column">
+                <h4>Дополнительно:</h4>
+                <p><strong><a href="#">Политика конфиденциальности</a></strong></p>
+                <p><strong><a href="#">Главный сайт РГСУ</a></strong></p>
+            </div>
+            <div class="footer-column social-icons">
+                <a href="#" title="Telegram"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="15" height="15" viewBox="0 0 50 50">
+                    <path d="M 44.376953 5.9863281 C 43.889905 6.0076957 43.415817 6.1432497 42.988281 6.3144531 C 42.565113 6.4845113 40.128883 7.5243408 36.53125 9.0625 C 32.933617 10.600659 28.256963 12.603668 23.621094 14.589844 C 14.349356 18.562196 5.2382813 22.470703 5.2382812 22.470703 L 5.3046875 22.445312 C 5.3046875 22.445312 4.7547875 22.629122 4.1972656 23.017578 C 3.9185047 23.211806 3.6186028 23.462555 3.3730469 23.828125 C 3.127491 24.193695 2.9479735 24.711788 3.015625 25.259766 C 3.2532479 27.184511 5.2480469 27.730469 5.2480469 27.730469 L 5.2558594 27.734375 L 14.158203 30.78125 C 14.385177 31.538434 16.858319 39.792923 17.402344 41.541016 C 17.702797 42.507484 17.984013 43.064995 18.277344 43.445312 C 18.424133 43.635633 18.577962 43.782915 18.748047 43.890625 C 18.815627 43.933415 18.8867 43.965525 18.957031 43.994141 C 18.958531 43.994806 18.959437 43.99348 18.960938 43.994141 C 18.969579 43.997952 18.977708 43.998295 18.986328 44.001953 L 18.962891 43.996094 C 18.979231 44.002694 18.995359 44.013801 19.011719 44.019531 C 19.043456 44.030655 19.062905 44.030268 19.103516 44.039062 C 20.123059 44.395042 20.966797 43.734375 20.966797 43.734375 L 21.001953 43.707031 L 26.470703 38.634766 L 35.345703 45.554688 L 35.457031 45.605469 C 37.010484 46.295216 38.415349 45.910403 39.193359 45.277344 C 39.97137 44.644284 40.277344 43.828125 40.277344 43.828125 L 40.310547 43.742188 L 46.832031 9.7519531 C 46.998903 8.9915162 47.022612 8.334202 46.865234 7.7402344 C 46.707857 7.1462668 46.325492 6.6299361 45.845703 6.34375 C 45.365914 6.0575639 44.864001 5.9649605 44.376953 5.9863281 z M 44.429688 8.0195312 C 44.627491 8.0103707 44.774102 8.032983 44.820312 8.0605469 C 44.866523 8.0881109 44.887272 8.0844829 44.931641 8.2519531 C 44.976011 8.419423 45.000036 8.7721605 44.878906 9.3242188 L 44.875 9.3359375 L 38.390625 43.128906 C 38.375275 43.162926 38.240151 43.475531 37.931641 43.726562 C 37.616914 43.982653 37.266874 44.182554 36.337891 43.792969 L 26.632812 36.224609 L 26.359375 36.009766 L 26.353516 36.015625 L 23.451172 33.837891 L 39.761719 14.648438 A 1.0001 1.0001 0 0 0 38.974609 13 A 1.0001 1.0001 0 0 0 38.445312 13.167969 L 14.84375 28.902344 L 5.9277344 25.849609 C 5.9277344 25.849609 5.0423771 25.356927 5 25.013672 C 4.99765 24.994652 4.9871961 25.011869 5.0332031 24.943359 C 5.0792101 24.874869 5.1948546 24.759225 5.3398438 24.658203 C 5.6298218 24.456159 5.9609375 24.333984 5.9609375 24.333984 L 5.9941406 24.322266 L 6.0273438 24.308594 C 6.0273438 24.308594 15.138894 20.399882 24.410156 16.427734 C 29.045787 14.44166 33.721617 12.440122 37.318359 10.902344 C 40.914175 9.3649615 43.512419 8.2583658 43.732422 8.1699219 C 43.982886 8.0696253 44.231884 8.0286918 44.429688 8.0195312 z M 33.613281 18.792969 L 21.244141 33.345703 L 21.238281 33.351562 A 1.0001 1.0001 0 0 0 21.183594 33.423828 A 1.0001 1.0001 0 0 0 21.128906 33.507812 A 1.0001 1.0001 0 0 0 20.998047 33.892578 A 1.0001 1.0001 0 0 0 20.998047 33.900391 L 19.386719 41.146484 C 19.35993 41.068197 19.341173 41.039555 19.3125 40.947266 L 19.3125 40.945312 C 18.800713 39.30085 16.467362 31.5161 16.144531 30.439453 L 33.613281 18.792969 z M 22.640625 35.730469 L 24.863281 37.398438 L 21.597656 40.425781 L 22.640625 35.730469 z"></path>
+                </svg></a>
+                <a href="#" title="WhatsApp"><ion-icon name="logo-whatsapp"></ion-icon></a>
+                <a href="#" title="VK"><ion-icon name="logo-vk"></ion-icon></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>ФГБОУ ВО "Российский государственный социальный университет"</div>
+            <div>Лицензия № Л035-00115-77/00119907</div>
+            <div>ИНН 7718084994</div>
+            <div>ОГРН 1027700134879</div>
+        </div>
+    </footer>
+
+</main>
+
+<script src="js/contacts.js"></script>
+<script src="js/urgent_request.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/ranges.js"></script>
+<script src="js/catalog.js"></script>
+<script src="js/Filter_button.js"></script>
+<script src="js/logo.js"></script>
+<script src="js/slider.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/form_question.js"></script>
+<script src="js/search.js"></script>
+<script src="js/sotial.js"></script>
+<script src="js/cookies.js"></script>
+<script src="js/LocalStorage.js"></script>
+<script src="js/mail_handler.js"></script>
+
+</body>
+</html>

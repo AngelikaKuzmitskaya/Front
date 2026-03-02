@@ -1,0 +1,13 @@
+{
+  "name": "Online-university",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "dependencies": {
+    "nouislider": "^15.8.1"
+  }
+}
